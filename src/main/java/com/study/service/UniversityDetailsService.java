@@ -1,5 +1,6 @@
 package com.study.service;
 
+import com.study.dto.UniversityDetailsDto;
 import com.study.entity.UniversityDetails;
 import com.study.repository.UniversityDetailsRepository;
 import org.springframework.beans.factory.annotation.Autowired;

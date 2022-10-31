@@ -1,5 +1,6 @@
 package com.study.controller;
 
+import com.study.dto.UniversityDetailsDto;
 import com.study.entity.UniversityDetails;
 import com.study.service.UniversityDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
