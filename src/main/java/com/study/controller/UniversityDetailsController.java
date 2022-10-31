@@ -5,7 +5,9 @@ import com.study.entity.UniversityDetails;
 import com.study.service.UniversityDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
+import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -25,17 +27,17 @@ public class UniversityDetailsController {
         universityDetailsService.add(universityDetailsDto);
     }
 
-    @GetMapping("/{country}")
+    @GetMapping("/country/{country}")
     public UniversityDetails getByCountry(@PathVariable (required = true) String country){
         return universityDetailsService.getByCountry(country);
     }
 
-    @GetMapping("/{state}")
+    @GetMapping("/state/{state}")
     public UniversityDetails getByState(@PathVariable (required = true) String state){
         return universityDetailsService.getByState(state);
     }
 
-    @GetMapping("/{domain}")
+    @GetMapping("/domain/{domain}")
     public UniversityDetails getByDomain(@PathVariable (required = true) String domain){
         return universityDetailsService.getByDomain(domain);
     }
@@ -43,5 +45,15 @@ public class UniversityDetailsController {
     @DeleteMapping("/{domain}")
     public void deleteUniversityDetails(@PathVariable (required = true) String domain) {
         universityDetailsService.delete(domain);
+    }
+
+    @GetMapping(value = "/callUniversityApi")
+    public List<Object> getUniversityDetailsApi(){
+
+        String url = "http://universities.hipolabs.com/search?country=india";
+        RestTemplate restTemplate = new RestTemplate();
+        Object[] universities = restTemplate.getForObject(url, Object[].class);
+        System.out.println(universities);
+        return Arrays.asList(universities);
     }
 }

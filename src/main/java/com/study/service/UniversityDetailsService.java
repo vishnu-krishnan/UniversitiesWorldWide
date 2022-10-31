@@ -2,6 +2,7 @@ package com.study.service;
 
 import com.study.dto.UniversityDetailsDto;
 import com.study.entity.UniversityDetails;
+import com.study.exceptionHandling.UniversityDetailsNotFoundException;
 import com.study.repository.UniversityDetailsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -16,7 +17,7 @@ public class UniversityDetailsService {
     UniversityDetailsRepository repository;
 
     public void add(UniversityDetailsDto universityDetailsDto){
-        repository.save(universityDetailsDto);
+        repository.save(toEntity(universityDetailsDto));
     }
 
     public void delete(String domain){
@@ -51,4 +52,6 @@ public class UniversityDetailsService {
         universityDetailsEntity.setState_province(universityDetailsDto.getState_province());
         return universityDetailsEntity;
     }
+
+
 }
